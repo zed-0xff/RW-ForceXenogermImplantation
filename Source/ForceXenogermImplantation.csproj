@@ -5,30 +5,31 @@
     <RootNamespace>zed.0xff.ForceXenogermImplantation</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <RimWorldVersion Condition="'$(RimWorldVersion)' == ''">1.6</RimWorldVersion>
+    <OutputPath>../$(RimWorldVersion)/Assemblies</OutputPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>../Assemblies</OutputPath>
-    <DebugSymbols>false</DebugSymbols>
+  <PropertyGroup Condition="'$(RimWorldVersion)' == '1.5' Or '$(RimWorldVersion)' == '1.6'">
+    <DefineConstants>$(DefineConstants);RW15</DefineConstants>
   </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../Assemblies</OutputPath>
+  <PropertyGroup Condition="'$(RimWorldVersion)' == '1.6'">
+    <DefineConstants>$(DefineConstants);RW16</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Lib.Harmony" Version="2.2.2" ExcludeAssets="runtime" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <PackageReference Include="Krafs.Rimworld.Ref" Condition="'$(RimWorldVersion)' == '1.4'">
+      <Version>1.4.*</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Krafs.Rimworld.Ref" Condition="'$(RimWorldVersion)' == '1.5'">
+      <Version>1.5.*</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Krafs.Rimworld.Ref" Condition="'$(RimWorldVersion)' == '1.6'">
+      <Version>1.6.*</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
